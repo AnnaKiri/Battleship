@@ -1,3 +1,5 @@
+package Battleship;
+
 import java.io.IOException;
 
 public class HelpFunctions {
