@@ -1,5 +1,3 @@
-package FinalProject;
-
 import java.util.Scanner;
 
 public class PlayingFieldInput {

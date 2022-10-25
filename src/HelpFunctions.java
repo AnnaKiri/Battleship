@@ -1,5 +1,3 @@
-package FinalProject;
-
 import java.io.IOException;
 
 public class HelpFunctions {
