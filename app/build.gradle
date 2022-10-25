@@ -28,3 +28,15 @@ application {
     // Define the main class for the application.
     mainClass = 'Battleship.App'
 }
+
+java {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
+jar {
+  manifest {
+    attributes(
+      'Main-Class': 'Battleship.App'
+    )
+  }
+}
