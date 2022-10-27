@@ -51,36 +51,53 @@ public class App {
 			}
 			System.out.println("Введи координаты удара (формат: x,y)");
 			String hit = scan.nextLine();
+			HelpFunctions.clearScreen();
 			String[] temp1 = hit.split(",");
 			int x = Integer.parseInt(temp1[0]);
 			int y = Integer.parseInt(temp1[1]);
+			
+			boolean check = HelpFunctions.coordinateCheck(x, y);
+			if (!check) {
+				continue;
+			}
+			
 			if (currentPlayer == 1) {
 				if (player2FieldForGame[x][y].equals("🚢")) {
 					player2FieldForGame[x][y] = "🟥";
 					player2FieldForCheck[x][y] = "🟥";
+					HelpFunctions.clearScreen();
 					System.out.println("Попал!");
 				} else {
 					player2FieldForGame[x][y] = "⬜";
 					player2FieldForCheck[x][y] = "⬜";
+					HelpFunctions.clearScreen();
 					System.out.println("Мимо!");
 					currentPlayer = 2;
 				}
 				
 				HelpFunctions.showMap(player2FieldForCheck);
+//				System.out.println("Нажми Enter для продолжения");
+				scan.nextLine();
+				HelpFunctions.clearScreen();
 				
 			} else {
 				if (player1FieldForGame[x][y].equals("🚢")) {
 					player1FieldForGame[x][y] = "🟥";
 					player1FieldForCheсk[x][y] = "🟥";
+					HelpFunctions.clearScreen();
 					System.out.println("Попал!");	
 				} else {
 					player1FieldForGame[x][y] = "⬜";
 					player1FieldForCheсk[x][y] = "⬜";
+					HelpFunctions.clearScreen();
 					System.out.println("Мимо!");
 					currentPlayer = 1;
 				}
 				
 				HelpFunctions.showMap(player1FieldForCheсk);
+//				System.out.println("Нажми Enter для продолжения");
+				scan.nextLine();
+				HelpFunctions.clearScreen();
 			}
 			
 			boolean player1win = !HelpFunctions.shipsAvailability(player2FieldForGame);

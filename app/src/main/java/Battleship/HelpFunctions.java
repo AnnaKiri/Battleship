@@ -27,12 +27,6 @@ public class HelpFunctions {
 	}
 	
 	public static void clearScreen() {   
-		for (int i = 0; i < 50; i++) {
-			System.out.println();
-		}
-	}
-	
-	public static void clearScreen2() {   // заработает после компиляции
 	    try {
 	      new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
 	    } catch (InterruptedException e) {
@@ -43,5 +37,13 @@ public class HelpFunctions {
 	      e.printStackTrace();
 	    }
 	}
-
+	
+	public static boolean coordinateCheck(int x, int y) {
+		boolean allIsOk = true;
+		if ((x < 0 && x > 9) && (y < y && y > 9)){ ///
+			allIsOk = false;
+			System.out.println("Координаты выходят за пределы поля! Попробуй еще раз!");
+		}
+		return allIsOk;
+	}
 }
