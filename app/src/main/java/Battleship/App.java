@@ -11,12 +11,12 @@ public class App {
 		Scanner scan = new Scanner(System.in);
 		
 		System.out.println("Начнем расставлять корабли на поле Player1. Другой игрок, не смотри!");
-		String [][] player1FieldForGame = PlayingFieldInput.playingField();
+		String [][] player1FieldForGame = PlayingFieldInput.playingField(scan);
 		scan.nextLine();
 		HelpFunctions.clearScreen();
 		
 		System.out.println("Начнем расставлять корабли на поле Player2. Другой игрок, не смотри!");
-		String [][] player2FieldForGame = PlayingFieldInput.playingField();
+		String [][] player2FieldForGame = PlayingFieldInput.playingField(scan);
 		scan.nextLine();
 		HelpFunctions.clearScreen();
 		
@@ -41,7 +41,7 @@ public class App {
 			}
 		}
 				
-		while(true) {
+		while (true) {
 			if (currentPlayer == 1) {
 				System.out.println("Ход игрока1");
 				HelpFunctions.showMap(player2FieldForCheck);
@@ -49,62 +49,36 @@ public class App {
 				System.out.println("Ход игрока2");
 				HelpFunctions.showMap(player1FieldForCheсk);
 			}
+			
 			System.out.println("Введи координаты удара (формат: x,y)");
 			String hit = scan.nextLine();
 			HelpFunctions.clearScreen();
+			String[] temp5 = {hit};
+			if (!HelpFunctions.coordinateValidation(temp5)) {
+				continue;
+			}
+			
 			String[] temp1 = hit.split(",");
 			int x = Integer.parseInt(temp1[0]);
 			int y = Integer.parseInt(temp1[1]);
 			
-			boolean check = HelpFunctions.coordinateCheck(x, y);
-			if (!check) {
-				continue;
-			}
 			
 			if (currentPlayer == 1) {
-				if (player2FieldForGame[x][y].equals("🚢")) {
-					player2FieldForGame[x][y] = "🟥";
-					player2FieldForCheck[x][y] = "🟥";
-					HelpFunctions.clearScreen();
-					System.out.println("Попал!");
-				} else {
-					player2FieldForGame[x][y] = "⬜";
-					player2FieldForCheck[x][y] = "⬜";
-					HelpFunctions.clearScreen();
-					System.out.println("Мимо!");
-					currentPlayer = 2;
-				}
-				
-				HelpFunctions.showMap(player2FieldForCheck);
-//				System.out.println("Нажми Enter для продолжения");
-				scan.nextLine();
-				HelpFunctions.clearScreen();
-				
+				currentPlayer = HelpFunctions.hit(player2FieldForGame, player2FieldForCheck, currentPlayer, x, y);
 			} else {
-				if (player1FieldForGame[x][y].equals("🚢")) {
-					player1FieldForGame[x][y] = "🟥";
-					player1FieldForCheсk[x][y] = "🟥";
-					HelpFunctions.clearScreen();
-					System.out.println("Попал!");	
-				} else {
-					player1FieldForGame[x][y] = "⬜";
-					player1FieldForCheсk[x][y] = "⬜";
-					HelpFunctions.clearScreen();
-					System.out.println("Мимо!");
-					currentPlayer = 1;
-				}
-				
-				HelpFunctions.showMap(player1FieldForCheсk);
-//				System.out.println("Нажми Enter для продолжения");
-				scan.nextLine();
-				HelpFunctions.clearScreen();
+				currentPlayer = HelpFunctions.hit(player1FieldForGame, player1FieldForCheсk, currentPlayer, x, y);
 			}
 			
+			scan.nextLine();
+			HelpFunctions.clearScreen();
+				
+				
 			boolean player1win = !HelpFunctions.shipsAvailability(player2FieldForGame);
 			if (player1win) {
 				System.out.println("Первый игрок победил!");
 				break;
 			}
+			
 			boolean player2win = !HelpFunctions.shipsAvailability(player1FieldForGame);
 			if (player2win) {
 				System.out.println("Второй игрок победил!");
