@@ -130,6 +130,22 @@ public class HelpFunctions {
 		return true;
 	}
 	
+	public static void areolaFilling(String [][] playerField) {
+		for (int i = 0; i < playerField.length; i++) {
+			for (int j = 0; j < playerField[i].length; j++) {
+				if (playerField[i][j].equals("🚢")) {
+					for (int newX = i-1; newX <= i+1; newX++) {
+						for (int newY = j-1; newY <= j+1; newY++) {
+							if (coordinateCheck(newX, newY) && (playerField[newX][newY].equals("🟦"))) {
+								playerField[newX][newY] = "🟨";
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	
 	public static boolean fieldCellFilling(String [] array, String [][] array1) {
 		for (int i = 0; i < array.length; i++) { // заполнение ячейки поля кораблем
 			String[] temp2 = array[i].split(",");
