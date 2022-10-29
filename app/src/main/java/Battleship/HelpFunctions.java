@@ -144,7 +144,7 @@ public class HelpFunctions {
 		
 		boolean allIsOk = true;
 		
-		allIsOk = allIsOk && HelpFunctions.shipLengthCheck(fourDeck, n);  // if after the execution of some method allIsOk becomes false, then further lines will not be read, because false will never become true
+		allIsOk = allIsOk && HelpFunctions.shipLengthCheck(fourDeck, n);  // Second operand (method) of && will not be call. Because first operand are already false. because false will never become true
 		allIsOk = allIsOk && HelpFunctions.coordinateValidation(fourDeck);
 		allIsOk = allIsOk && HelpFunctions.coordinateEqualityCheck(fourDeck);
 		allIsOk = allIsOk && HelpFunctions.coordinateLinearityCheck(fourDeck);

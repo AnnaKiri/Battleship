@@ -28,13 +28,13 @@ public class App {
 			System.out.println("Player2 starts");
 		}
 		
-		String [][] player1FieldForCheсk = new String[10][10]; // player1 field for player2
+		String [][] player1FieldForCheсk = new String[10][10]; // checking field of player1 for player2
 		for(int i = 0; i<player1FieldForCheсk.length; i++) {
 			for(int j = 0; j<player1FieldForCheсk[i].length; j++) {
 				player1FieldForCheсk[i][j] = "🟦";
 			}
 		}
-		String [][] player2FieldForCheck = new String[10][10]; // player2 field for player1
+		String [][] player2FieldForCheck = new String[10][10]; // checking field of player2 for player1
 		for(int i = 0; i<player2FieldForCheck.length; i++) {
 			for(int j = 0; j<player2FieldForCheck[i].length; j++) {
 				player2FieldForCheck[i][j] = "🟦";
@@ -50,7 +50,7 @@ public class App {
 				HelpFunctions.showMap(player1FieldForCheсk);
 			}
 			
-			System.out.println("Enter hit coordinates (format: x,y)");
+			System.out.println("Enter strike coordinates (format: x,y)");
 			String hit = scan.nextLine();
 			HelpFunctions.clearScreen();
 			String[] temp5 = {hit};
