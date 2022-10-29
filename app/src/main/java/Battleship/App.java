@@ -10,31 +10,31 @@ public class App {
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
 		
-		System.out.println("Начнем расставлять корабли на поле Player1. Другой игрок, не смотри!");
+		System.out.println("Let's start placing ships on the Player1 field. Another player, don't look!");
 		String [][] player1FieldForGame = PlayingFieldInput.playingField(scan);
 		scan.nextLine();
 		HelpFunctions.clearScreen();
 		
-		System.out.println("Начнем расставлять корабли на поле Player2. Другой игрок, не смотри!");
+		System.out.println("Let's start placing ships on the Player2 field. Another player, don't look!");
 		String [][] player2FieldForGame = PlayingFieldInput.playingField(scan);
 		scan.nextLine();
 		HelpFunctions.clearScreen();
 		
 		Random rand = new Random();
-		int currentPlayer = (int) (rand.nextInt(2)+1);  // целые числа 1 и 2
+		int currentPlayer = (int) (rand.nextInt(2)+1);  // integers 1 and 2
 		if (currentPlayer == 1) {
-			System.out.println("Начинает игрок1");
+			System.out.println("Player1 starts");
 		} else {
-			System.out.println("Начинает игрок2");
+			System.out.println("Player2 starts");
 		}
 		
-		String [][] player1FieldForCheсk = new String[10][10]; // поле первого игрока для второго игрока
+		String [][] player1FieldForCheсk = new String[10][10]; // player1 field for player2
 		for(int i = 0; i<player1FieldForCheсk.length; i++) {
 			for(int j = 0; j<player1FieldForCheсk[i].length; j++) {
 				player1FieldForCheсk[i][j] = "🟦";
 			}
 		}
-		String [][] player2FieldForCheck = new String[10][10]; // поле второго игрока для первого игрока
+		String [][] player2FieldForCheck = new String[10][10]; // player2 field for player1
 		for(int i = 0; i<player2FieldForCheck.length; i++) {
 			for(int j = 0; j<player2FieldForCheck[i].length; j++) {
 				player2FieldForCheck[i][j] = "🟦";
@@ -43,14 +43,14 @@ public class App {
 				
 		while (true) {
 			if (currentPlayer == 1) {
-				System.out.println("Ход игрока1");
+				System.out.println("Player1 move");
 				HelpFunctions.showMap(player2FieldForCheck);
 			} else {
-				System.out.println("Ход игрока2");
+				System.out.println("Player2 move");
 				HelpFunctions.showMap(player1FieldForCheсk);
 			}
 			
-			System.out.println("Введи координаты удара (формат: x,y)");
+			System.out.println("Enter hit coordinates (format: x,y)");
 			String hit = scan.nextLine();
 			HelpFunctions.clearScreen();
 			String[] temp5 = {hit};
@@ -75,20 +75,18 @@ public class App {
 				
 			boolean player1win = !HelpFunctions.shipsAvailability(player2FieldForGame);
 			if (player1win) {
-				System.out.println("Первый игрок победил!");
+				System.out.println("Player1 wins! 🥳  🎇");
 				break;
 			}
 			
 			boolean player2win = !HelpFunctions.shipsAvailability(player1FieldForGame);
 			if (player2win) {
-				System.out.println("Второй игрок победил!");
+				System.out.println("Player2 wins! 🥳  🎇");
 				break;
 			} 
 						
 		}
-		
-		
-		
+
 	}
 }
 

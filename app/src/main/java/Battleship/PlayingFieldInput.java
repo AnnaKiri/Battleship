@@ -14,9 +14,9 @@ public class PlayingFieldInput {
 		}
 		
 		while (true) {
-			System.out.println("Введи координаты четырехпалубного корабля (формат: x,y;x,y;x,y;x,y)");
+			System.out.println("Enter the four-deck ship coordinates (format: x,y;x,y;x,y;x,y)");
 			String ship = scan.nextLine();
-			String[] fourDeck = ship.split(";"); // 4 элемента
+			String[] fourDeck = ship.split(";");
 			
 			if (!HelpFunctions.generalCheckOfTheShip(fourDeck, 4, playerField)) {
 				continue;
@@ -29,9 +29,9 @@ public class PlayingFieldInput {
 		
 		for (int i = 0; i < 2; i++) {
 			while (true) {
-				System.out.println("Введи координаты трехпалубного корабля (формат: x,y;x,y;x,y)");
+				System.out.println("Enter the three-deck ship coordinates (format: x,y;x,y;x,y)");
 				String ship = scan.nextLine();
-				String[] threeDeck1 = ship.split(";"); // 3 элемента
+				String[] threeDeck1 = ship.split(";");
 			
 				if (!HelpFunctions.generalCheckOfTheShip(threeDeck1, 3, playerField)) {
 					continue;
@@ -46,9 +46,9 @@ public class PlayingFieldInput {
 		
 		for (int i = 0; i < 3; i++) {
 			while (true) {	
-				System.out.println("Введи координаты двухпалубного корабля (формат: x,y;x,y)");
+				System.out.println("Enter the double-deck ship coordinates (format: x,y;xy)");
 				String ship = scan.nextLine();
-				String[] doubleDeck1 = ship.split(";"); // 2 элемента
+				String[] doubleDeck1 = ship.split(";");
 
 				if (!HelpFunctions.generalCheckOfTheShip(doubleDeck1, 2, playerField)) {
 					continue;
@@ -62,9 +62,9 @@ public class PlayingFieldInput {
 		
 		for (int i = 0; i < 4; i++) {
 			while (true) {	
-				System.out.println("Введи координаты однопалубного корабля (формат: x,y)");
+				System.out.println("Enter the single-deck ship coordinates (format: x,y)");
 				String ship = scan.nextLine();
-				String[] singleDeck = {ship}; // 1 элемент
+				String[] singleDeck = {ship};
 
 				if (!HelpFunctions.generalCheckOfTheShip(singleDeck, 1, playerField)) {
 					continue;

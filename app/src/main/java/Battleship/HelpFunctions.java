@@ -40,27 +40,27 @@ public class HelpFunctions {
 	}
 	
 	public static boolean coordinateCheck(int x, int y) {
-		if ((x < 0 || x > 9) || (y < 0 || y > 9)){ ///
+		if ((x < 0 || x > 9) || (y < 0 || y > 9)){
 			return false;
 		}
 		
 		return true;
 	}
 	
-	public static boolean shipLengthCheck(String [] array, int n) {  // проверка длины корабля
+	public static boolean shipLengthCheck(String [] array, int n) {
 		if (array.length != n) {
-			System.out.println("Некорректный ввод координат корабля. Попробуй заново!");
+			System.out.println("Incorrect input of ship coordinates. Try again!");
 			return false;
 		}
 		return true;
 	}
 	
-	public static boolean coordinateValidation(String [] array) {  // проверка, что координаты формата х,у и типа int
+	public static boolean coordinateValidation(String [] array) {  // Checking that coordinates of x,y format and int type
 		for (int i = 0; i < array.length; i++) {
 			String[] temp2 = array[i].split(",");
 			
 			if (temp2.length != 2) {
-				System.out.println("Некорректный ввод координат корабля. Попробуй заново!");
+				System.out.println("Incorrect input of ship coordinates. Try again!");
 				return false;
 			}
 			
@@ -70,42 +70,42 @@ public class HelpFunctions {
 				x = Integer.parseInt(temp2[0]);
 				y = Integer.parseInt(temp2[1]);					
 			} catch (NumberFormatException e) {
-				System.out.println("Некорректный ввод координат корабля. Попробуй заново!");
+				System.out.println("Incorrect input of ship coordinates. Try again!");
 				return false;
 			}
 			
 			if (!HelpFunctions.coordinateCheck(x, y)) {
-				System.out.println("Координаты выходят за пределы поля! Попробуй еще раз!");
+				System.out.println("Coordinates outside the playing field. Try again!");
 				return false;
 			}
 		}
 		return true;
 	}
 	
-	public static boolean coordinateEqualityCheck(String [] array) {   // проверка координат, что они не равны друг другу
+	public static boolean coordinateEqualityCheck(String [] array) {   // checking that the coordinates are not equal to each other
 		for(int i = 0; i<array.length; i++) {
 			for(int j = 0; j<array.length; j++) {
 				if ((i != j) && (array[i].equals(array[j]))) {
-					System.out.println("Некорректный ввод координат корабля. Попробуй заново!");
+					System.out.println("Incorrect input of ship coordinates. Try again!");
 					return false;
-				} 				// else можно не писать, т.к. далее кода нет
+				} 				// else can be omitted because there is no further code
 			}
 		}
 		return true;
 	}
 	
 	public static boolean coordinateLinearityCheck(String [] array) {
-		for (int i = 0; i < array.length -1; i++) {  // проверка, что координаты линейны
+		for (int i = 0; i < array.length -1; i++) {
 			String[] temp2 = array[i].split(",");
 			int x1 = Integer.parseInt(temp2[0]);
 			int y1 = Integer.parseInt(temp2[1]);
 			
-			String[] temp3 = array[i+1].split(",");  // TODO: добавить проверку координат диагонали
+			String[] temp3 = array[i+1].split(",");  // TODO:  need to add a diagonal coordinate check
 			int x2 = Integer.parseInt(temp3[0]);
 			int y2 = Integer.parseInt(temp3[1]);
 			
 			if (Math.abs(x2-x1) > 1 || Math.abs(y2-y1) > 1) {
-				System.out.println("Некорректный ввод координат корабля. Попробуй заново!");
+				System.out.println("Incorrect input of ship coordinates. Try again!");
 				return false;
 			}
 		}
@@ -113,14 +113,14 @@ public class HelpFunctions {
 	}
 	
 	public static boolean shipAreolaCheck(String [] array, String [][] array1) {
-		for (int i = 0; i < array.length; i++) {  // проверка ареола корабля
+		for (int i = 0; i < array.length; i++) {
 			String[] temp2 = array[i].split(",");
 			int x = Integer.parseInt(temp2[0]);
 			int y = Integer.parseInt(temp2[1]);
 			for (int newX = x-1; newX <= x+1; newX++) {
 				for (int newY = y-1; newY <= y+1; newY++) {
 					if (coordinateCheck(newX, newY) && (array1[newX][newY].equals("🚢"))) {
-						System.out.println("Ареол этого корабля пересекается с другим кораблем. Попробуй заново!");
+						System.out.println("The areola of this ship cross(intersects) with another ship. Try again!");
 						return false;
 					} 
 				}
@@ -131,7 +131,7 @@ public class HelpFunctions {
 	}
 	
 	public static boolean fieldCellFilling(String [] array, String [][] array1) {
-		for (int i = 0; i < array.length; i++) { // заполнение ячейки поля кораблем
+		for (int i = 0; i < array.length; i++) { // filling the field cell by a ship
 			String[] temp2 = array[i].split(",");
 			int x = Integer.parseInt(temp2[0]);
 			int y = Integer.parseInt(temp2[1]);
@@ -144,7 +144,7 @@ public class HelpFunctions {
 		
 		boolean allIsOk = true;
 		
-		allIsOk = allIsOk && HelpFunctions.shipLengthCheck(fourDeck, n);  // если после какого-то метода allIsOk станет false, что дальше строки не будут читаться, т.к. из false уже никогда не станет true
+		allIsOk = allIsOk && HelpFunctions.shipLengthCheck(fourDeck, n);  // if after the execution of some method allIsOk becomes false, then further lines will not be read, because false will never become true
 		allIsOk = allIsOk && HelpFunctions.coordinateValidation(fourDeck);
 		allIsOk = allIsOk && HelpFunctions.coordinateEqualityCheck(fourDeck);
 		allIsOk = allIsOk && HelpFunctions.coordinateLinearityCheck(fourDeck);
@@ -159,12 +159,12 @@ public class HelpFunctions {
 			playerFieldForGame[x][y] = "🟥";
 			playerFieldForCheck[x][y] = "🟥";
 			HelpFunctions.clearScreen();
-			System.out.println("Попал!");
+			System.out.println("Hit!");
 		} else {
 			playerFieldForGame[x][y] = "⬜";
 			playerFieldForCheck[x][y] = "⬜";
 			HelpFunctions.clearScreen();
-			System.out.println("Мимо!");
+			System.out.println("Miss!");
 			if (currentPlayer == 2) {
 				player = 1;
 			} else {
