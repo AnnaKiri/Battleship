@@ -14,7 +14,7 @@ public class PlayingFieldInput {
 		}
 		
 		while (true) {
-			System.out.println("Enter the four-deck ship coordinates (format: x,y;x,y;x,y;x,y)");
+			System.out.println("Enter the four-deck ship coordinates (format: a0;b1;c3;d4)");
 			String ship = scan.nextLine();
 			String[] fourDeck = ship.split(";");
 			
@@ -29,7 +29,7 @@ public class PlayingFieldInput {
 		
 		for (int i = 0; i < 2; i++) {
 			while (true) {
-				System.out.println("Enter the three-deck ship coordinates (format: x,y;x,y;x,y)");
+				System.out.println("Enter the three-deck ship coordinates (format: a0;b1;c3)");
 				String ship = scan.nextLine();
 				String[] threeDeck1 = ship.split(";");
 			
@@ -46,7 +46,7 @@ public class PlayingFieldInput {
 		
 		for (int i = 0; i < 3; i++) {
 			while (true) {	
-				System.out.println("Enter the double-deck ship coordinates (format: x,y;xy)");
+				System.out.println("Enter the double-deck ship coordinates (format: a0;b1)");
 				String ship = scan.nextLine();
 				String[] doubleDeck1 = ship.split(";");
 
@@ -62,7 +62,7 @@ public class PlayingFieldInput {
 		
 		for (int i = 0; i < 4; i++) {
 			while (true) {	
-				System.out.println("Enter the single-deck ship coordinates (format: x,y)");
+				System.out.println("Enter the single-deck ship coordinates (format: a0)");
 				String ship = scan.nextLine();
 				String[] singleDeck = {ship};
 
