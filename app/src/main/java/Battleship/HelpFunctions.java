@@ -7,12 +7,23 @@ public class HelpFunctions {
 	
 	public static void showMap(String [][] array) {
 		
+		System.out.print("   ");
+		for (int i = 0; i < 10; i++) {
+			System.out.print(i + "  ");
+		}
+		System.out.println();
+
 		for (int i = 0; i<array.length; i++) {
+			System.out.print(getCharForNumber(i+1) + " ");
 			for (int j = 0; j<array[i].length; j++) {
 				System.out.print(array[i][j] + " ");
 			}
 			System.out.println();
 		}
+	}
+	
+	private static String getCharForNumber(int i) {
+	    return i > 0 && i < 27 ? String.valueOf((char)(i + 96)) : null;
 	}
 	
 	public static boolean shipsAvailability (String [][] array) {
