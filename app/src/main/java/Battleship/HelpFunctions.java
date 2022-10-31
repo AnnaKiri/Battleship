@@ -1,14 +1,19 @@
 package Battleship;
 
 import java.io.IOException;
-import java.util.Scanner;
 
 public class HelpFunctions {
+	
+	static final int A_INDEX_IN_THE_ALPHABET = 1;
+	static final int J_INDEX_IN_THE_ALPHABET = 10;
+	static final int A_INDEX_IN_THE_ASCII = 97;
+	static final int J_INDEX_IN_THE_ASCII = 106;	
+	static final int DIMENSIONS_COORDINATES = 2;
 	
 	public static void showMap(String [][] playerField) {
 		
 		System.out.print("   ");
-		for (int i = 0; i < 10; i++) {
+		for (int i = 0; i < PlayingFieldInput.FIELD_SIZE; i++) {
 			System.out.print(i + "  ");
 		}
 		System.out.println();
@@ -22,14 +27,14 @@ public class HelpFunctions {
 		}
 	}
 	
-	private static String getCharForNumber(int indexLetter) {
-	    return indexLetter > 0 && indexLetter < 27 ? String.valueOf((char)(indexLetter + 96)) : null;  // если запрашиваемый номер буквы в алфавите находится от 1 до 26, тогда вернуть символ ASCII, иначе вернуть null
+	private static String getCharForNumber(final int indexLetter) {
+	    return indexLetter >= A_INDEX_IN_THE_ALPHABET && indexLetter <= J_INDEX_IN_THE_ALPHABET ? String.valueOf((char)(indexLetter + (A_INDEX_IN_THE_ASCII - 1))) : null;  // if the requested index of the letter in the alphabet is between 1 and 9 then return the ASCII character, else return "null"
 	}
 	
-	public static int getNumberForChar(char letter) {  // этот метод дает порядковый номер буквы в алфавите
-		int index = (int) letter;					// index это порядковый номер ASCII
-		if (index >= 97 && index <= 106) {
-			return index - 97;
+	public static int getNumberForChar(final char letter) {  // this method gives the index of the letter in the alphabet
+		final int index = (int) letter;					// index is an ASCII index
+		if (index >= A_INDEX_IN_THE_ASCII && index <= J_INDEX_IN_THE_ASCII) {
+			return index - A_INDEX_IN_THE_ASCII;
 		} else {
 			return -1;
 		}
@@ -59,15 +64,15 @@ public class HelpFunctions {
 	    }
 	}
 	
-	public static boolean coordinateCheck(int x, int y) {
-		if ((x < 0 || x > 9) || (y < 0 || y > 9)) {
+	public static boolean coordinateCheck(final int x, final int y) {
+		if ((x < 0 || x > (PlayingFieldInput.FIELD_SIZE - 1)) || (y < 0 || y > (PlayingFieldInput.FIELD_SIZE - 1))) {
 			return false;
 		}
 		
 		return true;
 	}
 	
-	public static boolean shipLengthCheck(String [] shipCoordinates, int shipLength) {
+	public static boolean shipLengthCheck(String [] shipCoordinates, final int shipLength) {
 		if (shipCoordinates.length != shipLength) {
 			System.out.println("Incorrect input of ship coordinates. Try again!");
 			return false;
@@ -78,7 +83,7 @@ public class HelpFunctions {
 	public static boolean coordinateValidation(String [] shipCoordinates) {  // Checking that coordinates of x,y format and int type
 		for (int i = 0; i < shipCoordinates.length; i++) {
 
-			if (shipCoordinates[i].length() != 2) {
+			if (shipCoordinates[i].length() != DIMENSIONS_COORDINATES) {
 				System.out.println("Incorrect input of ship coordinates. Try again!");
 				return false;
 			}
@@ -118,11 +123,11 @@ public class HelpFunctions {
 	public static boolean coordinateLinearityCheck(String [] shipCoordinates) {
 		boolean isHorizontal = true;
 		if (shipCoordinates.length > 1) {
-			int x0 = getNumberForChar(shipCoordinates[0].charAt(0));				
-			int y0 = Integer.parseInt(String.valueOf(shipCoordinates[0].charAt(1)));
+			final int x0 = getNumberForChar(shipCoordinates[0].charAt(0));				
+			final int y0 = Integer.parseInt(String.valueOf(shipCoordinates[0].charAt(1)));
 			
-			int x1 = getNumberForChar(shipCoordinates[1].charAt(0));				
-			int y1 = Integer.parseInt(String.valueOf(shipCoordinates[1].charAt(1)));
+			final int x1 = getNumberForChar(shipCoordinates[1].charAt(0));				
+			final int y1 = Integer.parseInt(String.valueOf(shipCoordinates[1].charAt(1)));
 			
 			if (x0 != x1 && y0 != y1) {													// diagonal coordinate check
 				System.out.println("Incorrect input of ship coordinates. Try again!");
@@ -131,21 +136,21 @@ public class HelpFunctions {
 			isHorizontal = x0 == x1;
 		}
 		
-		for (int i = 1; i < shipCoordinates.length -1; i++) {
+		for (int i = 1; i < shipCoordinates.length - 1; i++) {
 			
-			int x3 = getNumberForChar(shipCoordinates[i].charAt(0));
-			int y3 = Integer.parseInt(String.valueOf(shipCoordinates[i].charAt(1)));
+			final int x3 = getNumberForChar(shipCoordinates[i].charAt(0));
+			final int y3 = Integer.parseInt(String.valueOf(shipCoordinates[i].charAt(1)));
 																				
-			int x4 = getNumberForChar(shipCoordinates[i + 1].charAt(0));
-			int y4 = Integer.parseInt(String.valueOf(shipCoordinates[i + 1].charAt(1)));
+			final int x4 = getNumberForChar(shipCoordinates[i + 1].charAt(0));
+			final int y4 = Integer.parseInt(String.valueOf(shipCoordinates[i + 1].charAt(1)));
 			
 			if (isHorizontal) {
-				if (x3 != x4 || Math.abs(y4-y3) != 1) { 							// Horizontal check
+				if (x3 != x4 || Math.abs(y4 - y3) != 1) { 							// Horizontal check
 					System.out.println("Incorrect input of ship coordinates. Try again!");
 					return false;
 				}
 			} else {
-				if (y3 != y4 || Math.abs(x4-x3) != 1) { 							// Vertical check
+				if (y3 != y4 || Math.abs(x4 - x3) != 1) { 							// Vertical check
 					System.out.println("Incorrect input of ship coordinates. Try again!");
 					return false;
 				}
@@ -158,8 +163,8 @@ public class HelpFunctions {
 	public static boolean shipAreolaCheck(String [] shipCoordinates, String [][] playerField) {
 		for (int i = 0; i < shipCoordinates.length; i++) {
 			
-			int x = getNumberForChar(shipCoordinates[i].charAt(0));
-			int y = Integer.parseInt(String.valueOf(shipCoordinates[i].charAt(1)));
+			final int x = getNumberForChar(shipCoordinates[i].charAt(0));
+			final int y = Integer.parseInt(String.valueOf(shipCoordinates[i].charAt(1)));
 
 			for (int newX = x-1; newX <= x+1; newX++) {
 				for (int newY = y-1; newY <= y+1; newY++) {
@@ -192,15 +197,15 @@ public class HelpFunctions {
 	
 	public static boolean fieldCellFilling(String [] shipCoordinates, String [][] playerField) {
 		for (int i = 0; i < shipCoordinates.length; i++) { // filling the field cell by a ship
-			int x = getNumberForChar(shipCoordinates[i].charAt(0));
-			int y = Integer.parseInt(String.valueOf(shipCoordinates[i].charAt(1)));
+			final int x = getNumberForChar(shipCoordinates[i].charAt(0));
+			final int y = Integer.parseInt(String.valueOf(shipCoordinates[i].charAt(1)));
 			playerField[x][y] = "🚢";
 		}
 		
 		return true;
 	}
 	
-	public static boolean generalCheckOfTheShip(String [] shipCoordinates, int shipLength, String [][] playerField) {
+	public static boolean generalCheckOfTheShip(String [] shipCoordinates, final int shipLength, String [][] playerField) {
 		
 		boolean allIsOk = true;
 		
@@ -209,11 +214,10 @@ public class HelpFunctions {
 		allIsOk = allIsOk && HelpFunctions.coordinateEqualityCheck(shipCoordinates);
 		allIsOk = allIsOk && HelpFunctions.coordinateLinearityCheck(shipCoordinates);
 		allIsOk = allIsOk && HelpFunctions.shipAreolaCheck(shipCoordinates, playerField);
-		
 		return allIsOk;
 	}
 	
-	public static int hit(String [][] playerFieldForGame, String [][] playerFieldForCheck, int currentPlayer, int x, int y) {
+	public static int hit(String [][] playerFieldForGame, String [][] playerFieldForCheck, final int currentPlayer, final int x, final int y) {
 		int player = currentPlayer;
 		if (playerFieldForGame[x][y].equals("🚢")) {
 			playerFieldForGame[x][y] = "🟥";

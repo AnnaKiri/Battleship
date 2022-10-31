@@ -28,13 +28,13 @@ public class App {
 			System.out.println("Player2 starts");
 		}
 		
-		String [][] player1FieldForCheсk = new String[10][10]; // checking field of player1 for player2
+		String [][] player1FieldForCheсk = new String[PlayingFieldInput.FIELD_SIZE][PlayingFieldInput.FIELD_SIZE]; // checking field of player1 for player2
 		for(int i = 0; i<player1FieldForCheсk.length; i++) {
 			for(int j = 0; j<player1FieldForCheсk[i].length; j++) {
 				player1FieldForCheсk[i][j] = "🟦";
 			}
 		}
-		String [][] player2FieldForCheck = new String[10][10]; // checking field of player2 for player1
+		String [][] player2FieldForCheck = new String[PlayingFieldInput.FIELD_SIZE][PlayingFieldInput.FIELD_SIZE]; // checking field of player2 for player1
 		for(int i = 0; i<player2FieldForCheck.length; i++) {
 			for(int j = 0; j<player2FieldForCheck[i].length; j++) {
 				player2FieldForCheck[i][j] = "🟦";
@@ -51,15 +51,15 @@ public class App {
 			}
 			
 			System.out.println("Enter strike coordinates (format: a0)");
-			String hit = scan.nextLine();
+			final String hitCoordinates = scan.nextLine();
 			HelpFunctions.clearScreen();
-			String[] temp5 = {hit};
-			if (!HelpFunctions.coordinateValidation(temp5)) {
+			final String[] tempHitCoordinates = {hitCoordinates};
+			if (!HelpFunctions.coordinateValidation(tempHitCoordinates)) {
 				continue;
 			}
 			
-			int x = HelpFunctions.getNumberForChar(hit.charAt(0));
-			int y = Integer.parseInt(String.valueOf(hit.charAt(1)));
+			final int x = HelpFunctions.getNumberForChar(hitCoordinates.charAt(0));
+			final int y = Integer.parseInt(String.valueOf(hitCoordinates.charAt(1)));
 
 			if (currentPlayer == 1) {
 				currentPlayer = HelpFunctions.hit(player2FieldForGame, player2FieldForCheck, currentPlayer, x, y);
@@ -70,15 +70,12 @@ public class App {
 			scan.nextLine();
 			HelpFunctions.clearScreen();
 				
-				
-			boolean player1win = !HelpFunctions.shipsAvailability(player2FieldForGame);
-			if (player1win) {
+			if (!HelpFunctions.shipsAvailability(player2FieldForGame)) {
 				System.out.println("Player1 wins! 🥳  🎇");
 				break;
 			}
 			
-			boolean player2win = !HelpFunctions.shipsAvailability(player1FieldForGame);
-			if (player2win) {
+			if (!HelpFunctions.shipsAvailability(player1FieldForGame)) {
 				System.out.println("Player2 wins! 🥳  🎇");
 				break;
 			} 		
