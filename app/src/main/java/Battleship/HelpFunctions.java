@@ -194,6 +194,14 @@ public class HelpFunctions {
 			playerFieldForCheck[x][y] = "🟥";
 			HelpFunctions.clearScreen();
 			System.out.println("Hit!");
+		} else if (playerFieldForGame[x][y].equals("🟥")){
+			HelpFunctions.clearScreen();
+			System.out.println("Re - hit!");
+			if (currentPlayer == 2) {
+				player = 1;
+			} else {
+				player = 2;
+			}
 		} else {
 			playerFieldForGame[x][y] = "⬜";
 			playerFieldForCheck[x][y] = "⬜";
