@@ -81,10 +81,8 @@ public class App {
 			if (player2win) {
 				System.out.println("Player2 wins! 🥳  🎇");
 				break;
-			} 
-						
+			} 		
 		}
-
 	}
 }
 

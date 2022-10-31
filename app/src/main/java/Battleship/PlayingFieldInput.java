@@ -15,14 +15,14 @@ public class PlayingFieldInput {
 		
 		while (true) {
 			System.out.println("Enter the four-deck ship coordinates (format: a0;b1;c3;d4)");
-			String ship = scan.nextLine();
-			String[] fourDeck = ship.split(";");
+			String shipCoordinates = scan.nextLine();
+			String[] fourDeckCoord = shipCoordinates.split(";");
 			
-			if (!HelpFunctions.generalCheckOfTheShip(fourDeck, 4, playerField)) {
+			if (!HelpFunctions.generalCheckOfTheShip(fourDeckCoord, 4, playerField)) {
 				continue;
 			}
 			
-			if (HelpFunctions.fieldCellFilling(fourDeck, playerField)) {
+			if (HelpFunctions.fieldCellFilling(fourDeckCoord, playerField)) {
 				break;
 			} 
 		}
@@ -30,14 +30,14 @@ public class PlayingFieldInput {
 		for (int i = 0; i < 2; i++) {
 			while (true) {
 				System.out.println("Enter the three-deck ship coordinates (format: a0;b1;c3)");
-				String ship = scan.nextLine();
-				String[] threeDeck1 = ship.split(";");
+				String shipCoordinates = scan.nextLine();
+				String[] threeDeckCoord = shipCoordinates.split(";");
 			
-				if (!HelpFunctions.generalCheckOfTheShip(threeDeck1, 3, playerField)) {
+				if (!HelpFunctions.generalCheckOfTheShip(threeDeckCoord, 3, playerField)) {
 					continue;
 				}
 				
-				if (HelpFunctions.fieldCellFilling(threeDeck1, playerField)) {
+				if (HelpFunctions.fieldCellFilling(threeDeckCoord, playerField)) {
 					break;
 				} 
 			}
@@ -47,14 +47,14 @@ public class PlayingFieldInput {
 		for (int i = 0; i < 3; i++) {
 			while (true) {	
 				System.out.println("Enter the double-deck ship coordinates (format: a0;b1)");
-				String ship = scan.nextLine();
-				String[] doubleDeck1 = ship.split(";");
+				String shipCoordinates = scan.nextLine();
+				String[] doubleDeckCoord = shipCoordinates.split(";");
 
-				if (!HelpFunctions.generalCheckOfTheShip(doubleDeck1, 2, playerField)) {
+				if (!HelpFunctions.generalCheckOfTheShip(doubleDeckCoord, 2, playerField)) {
 					continue;
 				}
 				
-				if (HelpFunctions.fieldCellFilling(doubleDeck1, playerField)) {
+				if (HelpFunctions.fieldCellFilling(doubleDeckCoord, playerField)) {
 					break;
 				} 
 			}
@@ -63,14 +63,14 @@ public class PlayingFieldInput {
 		for (int i = 0; i < 4; i++) {
 			while (true) {	
 				System.out.println("Enter the single-deck ship coordinates (format: a0)");
-				String ship = scan.nextLine();
-				String[] singleDeck = {ship};
+				String shipCoordinates = scan.nextLine();
+				String[] singleDeckCoord = {shipCoordinates};
 
-				if (!HelpFunctions.generalCheckOfTheShip(singleDeck, 1, playerField)) {
+				if (!HelpFunctions.generalCheckOfTheShip(singleDeckCoord, 1, playerField)) {
 					continue;
 				}
 				
-				if (HelpFunctions.fieldCellFilling(singleDeck, playerField)) {
+				if (HelpFunctions.fieldCellFilling(singleDeckCoord, playerField)) {
 					break;
 				} 
 			}
