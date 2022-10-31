@@ -114,15 +114,42 @@ public class HelpFunctions {
 	}
 	
 	public static boolean coordinateLinearityCheck(String [] array) {
-		for (int i = 0; i < array.length -1; i++) {
+		boolean isHorizontal = true;
+		if ( array.length > 1) {
+			int x0 = getNumberForChar(array[0].charAt(0));				
+			int y0 = Integer.parseInt(String.valueOf(array[0].charAt(1)));
 			
-			int x1 = getNumberForChar(array[i].charAt(0));
-			int y1 = Integer.parseInt(String.valueOf(array[i].charAt(1)));
-																				// TODO:  need to add a diagonal coordinate check
-			int x2 = getNumberForChar(array[i + 1].charAt(0));
-			int y2 = Integer.parseInt(String.valueOf(array[i + 1].charAt(1)));
+			int x1 = getNumberForChar(array[1].charAt(0));				
+			int y1 = Integer.parseInt(String.valueOf(array[1].charAt(1)));
 			
-			if (Math.abs(x2-x1) > 1 || Math.abs(y2-y1) > 1) {
+			if (x0 != x1 && y0 != y1) {													// diagonal coordinate check
+				System.out.println("Incorrect input of ship coordinates. Try again!");
+				return false;
+			}
+			isHorizontal = x0 == x1;
+		}
+		
+		for (int i = 1; i < array.length -1; i++) {
+			
+			int x3 = getNumberForChar(array[i].charAt(0));
+			int y3 = Integer.parseInt(String.valueOf(array[i].charAt(1)));
+																				
+			int x4 = getNumberForChar(array[i + 1].charAt(0));
+			int y4 = Integer.parseInt(String.valueOf(array[i + 1].charAt(1)));
+			
+			if (isHorizontal) {
+				if (x3 != x4 || Math.abs(y4-y3) != 1) { 							// Horizontal check
+					System.out.println("Incorrect input of ship coordinates. Try again!");
+					return false;
+				}
+			} else {
+				if (y3 != y4 || Math.abs(x4-x3) != 1) { 							// Vertical check
+					System.out.println("Incorrect input of ship coordinates. Try again!");
+					return false;
+				}
+			}
+			
+			if (Math.abs(x4-x3) > 1 || Math.abs(y4-y3) > 1) {
 				System.out.println("Incorrect input of ship coordinates. Try again!");
 				return false;
 			}
