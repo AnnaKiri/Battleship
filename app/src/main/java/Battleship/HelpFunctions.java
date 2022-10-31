@@ -7,11 +7,31 @@ public class HelpFunctions {
 	
 	public static void showMap(String [][] array) {
 		
+		System.out.print("   ");
+		for (int i = 0; i < 10; i++) {
+			System.out.print(i + "  ");
+		}
+		System.out.println();
+
 		for (int i = 0; i<array.length; i++) {
+			System.out.print(getCharForNumber(i+1) + " ");
 			for (int j = 0; j<array[i].length; j++) {
 				System.out.print(array[i][j] + " ");
 			}
 			System.out.println();
+		}
+	}
+	
+	private static String getCharForNumber(int i) {
+	    return i > 0 && i < 27 ? String.valueOf((char)(i + 96)) : null;
+	}
+	
+	public static int getNumberForChar(char i) {
+		int value = (int) i;
+		if (value >= 97 && value <= 106) {
+			return value - 97;
+		} else {
+			return -1;
 		}
 	}
 	
@@ -57,9 +77,8 @@ public class HelpFunctions {
 	
 	public static boolean coordinateValidation(String [] array) {  // Checking that coordinates of x,y format and int type
 		for (int i = 0; i < array.length; i++) {
-			String[] temp2 = array[i].split(",");
-			
-			if (temp2.length != 2) {
+
+			if (array[i].length() != 2) {
 				System.out.println("Incorrect input of ship coordinates. Try again!");
 				return false;
 			}
@@ -67,8 +86,8 @@ public class HelpFunctions {
 			int x;
 			int y;
 			try {
-				x = Integer.parseInt(temp2[0]);
-				y = Integer.parseInt(temp2[1]);					
+				x = getNumberForChar(array[i].charAt(0));				
+				y = Integer.parseInt(String.valueOf(array[i].charAt(1)));					
 			} catch (NumberFormatException e) {
 				System.out.println("Incorrect input of ship coordinates. Try again!");
 				return false;
@@ -96,13 +115,12 @@ public class HelpFunctions {
 	
 	public static boolean coordinateLinearityCheck(String [] array) {
 		for (int i = 0; i < array.length -1; i++) {
-			String[] temp2 = array[i].split(",");
-			int x1 = Integer.parseInt(temp2[0]);
-			int y1 = Integer.parseInt(temp2[1]);
 			
-			String[] temp3 = array[i+1].split(",");  // TODO:  need to add a diagonal coordinate check
-			int x2 = Integer.parseInt(temp3[0]);
-			int y2 = Integer.parseInt(temp3[1]);
+			int x1 = getNumberForChar(array[i].charAt(0));
+			int y1 = Integer.parseInt(String.valueOf(array[i].charAt(1)));
+																				// TODO:  need to add a diagonal coordinate check
+			int x2 = getNumberForChar(array[i + 1].charAt(0));
+			int y2 = Integer.parseInt(String.valueOf(array[i + 1].charAt(1)));
 			
 			if (Math.abs(x2-x1) > 1 || Math.abs(y2-y1) > 1) {
 				System.out.println("Incorrect input of ship coordinates. Try again!");
@@ -114,9 +132,10 @@ public class HelpFunctions {
 	
 	public static boolean shipAreolaCheck(String [] array, String [][] array1) {
 		for (int i = 0; i < array.length; i++) {
-			String[] temp2 = array[i].split(",");
-			int x = Integer.parseInt(temp2[0]);
-			int y = Integer.parseInt(temp2[1]);
+			
+			int x = getNumberForChar(array[i].charAt(0));
+			int y = Integer.parseInt(String.valueOf(array[i].charAt(1)));
+
 			for (int newX = x-1; newX <= x+1; newX++) {
 				for (int newY = y-1; newY <= y+1; newY++) {
 					if (coordinateCheck(newX, newY) && (array1[newX][newY].equals("🚢"))) {
@@ -146,12 +165,11 @@ public class HelpFunctions {
 		}
 	}
 	
-	public static boolean fieldCellFilling(String [] array, String [][] array1) {
-		for (int i = 0; i < array.length; i++) { // filling the field cell by a ship
-			String[] temp2 = array[i].split(",");
-			int x = Integer.parseInt(temp2[0]);
-			int y = Integer.parseInt(temp2[1]);
-			array1[x][y] = "🚢";
+	public static boolean fieldCellFilling(String [] fourDeck, String [][] playerField) {
+		for (int i = 0; i < fourDeck.length; i++) { // filling the field cell by a ship
+			int x = getNumberForChar(fourDeck[i].charAt(0));
+			int y = Integer.parseInt(String.valueOf(fourDeck[i].charAt(1)));
+			playerField[x][y] = "🚢";
 		}
 		return true;
 	}

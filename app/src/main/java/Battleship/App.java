@@ -50,7 +50,7 @@ public class App {
 				HelpFunctions.showMap(player1FieldForCheсk);
 			}
 			
-			System.out.println("Enter strike coordinates (format: x,y)");
+			System.out.println("Enter strike coordinates (format: a0)");
 			String hit = scan.nextLine();
 			HelpFunctions.clearScreen();
 			String[] temp5 = {hit};
@@ -58,11 +58,9 @@ public class App {
 				continue;
 			}
 			
-			String[] temp1 = hit.split(",");
-			int x = Integer.parseInt(temp1[0]);
-			int y = Integer.parseInt(temp1[1]);
-			
-			
+			int x = HelpFunctions.getNumberForChar(hit.charAt(0));
+			int y = Integer.parseInt(String.valueOf(hit.charAt(1)));
+
 			if (currentPlayer == 1) {
 				currentPlayer = HelpFunctions.hit(player2FieldForGame, player2FieldForCheck, currentPlayer, x, y);
 			} else {
