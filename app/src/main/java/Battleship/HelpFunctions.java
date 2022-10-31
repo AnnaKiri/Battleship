@@ -148,11 +148,6 @@ public class HelpFunctions {
 					return false;
 				}
 			}
-			
-			if (Math.abs(x4-x3) > 1 || Math.abs(y4-y3) > 1) {
-				System.out.println("Incorrect input of ship coordinates. Try again!");
-				return false;
-			}
 		}
 		return true;	
 	}
