@@ -74,7 +74,7 @@ public class PlayingFieldInput {
 					break;
 				} 
 			}
-		}
+		} 
 
 		HelpFunctions.areolaFilling(playerField);
 		HelpFunctions.showMap(playerField);
