@@ -136,7 +136,7 @@ public class HelpFunctions {
 			isHorizontal = x0 == x1;
 		}
 		
-		for (int i = 1; i < shipCoordinates.length - 1; i++) {
+		for (int i = 0; i < shipCoordinates.length - 1; i++) {
 			
 			final int x3 = getNumberForChar(shipCoordinates[i].charAt(0));
 			final int y3 = Integer.parseInt(String.valueOf(shipCoordinates[i].charAt(1)));
