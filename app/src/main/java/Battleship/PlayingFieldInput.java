@@ -28,6 +28,9 @@ public class PlayingFieldInput {
 			}
 			
 			if (HelpFunctions.fieldCellFilling(fourDeckCoord, playerField)) {
+				HelpFunctions.clearScreen();
+				HelpFunctions.areolaFilling(playerField, "🚢");
+				HelpFunctions.showMap(playerField);
 				break;
 			} 
 		}
@@ -43,6 +46,9 @@ public class PlayingFieldInput {
 				}
 				
 				if (HelpFunctions.fieldCellFilling(threeDeckCoord, playerField)) {
+					HelpFunctions.clearScreen();
+					HelpFunctions.areolaFilling(playerField, "🚢");
+					HelpFunctions.showMap(playerField);
 					break;
 				} 
 			}
@@ -60,6 +66,9 @@ public class PlayingFieldInput {
 				}
 				
 				if (HelpFunctions.fieldCellFilling(doubleDeckCoord, playerField)) {
+					HelpFunctions.clearScreen();
+					HelpFunctions.areolaFilling(playerField, "🚢");
+					HelpFunctions.showMap(playerField);
 					break;
 				} 
 			}
@@ -76,16 +85,15 @@ public class PlayingFieldInput {
 				}
 				
 				if (HelpFunctions.fieldCellFilling(singleDeckCoord, playerField)) {
+					HelpFunctions.clearScreen();
+					HelpFunctions.areolaFilling(playerField, "🚢");
+					HelpFunctions.showMap(playerField);
 					break;
 				} 
 			}
 		} 
-
-		HelpFunctions.areolaFilling(playerField);
-		HelpFunctions.showMap(playerField);
 		
 		return playerField;
-		
 	}
 
 }
