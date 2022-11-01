@@ -217,13 +217,38 @@ public class HelpFunctions {
 		return allIsOk;
 	}
 	
+	public static boolean checkShipDestroy(final int x, final int y, String [][] playerField, final int ignoreX, final int ignoreY) {		
+		for (int newX = x-1; newX <= x+1; newX++) {
+			for (int newY = y-1; newY <= y+1; newY++) {
+				if (!coordinateCheck(newX, newY) || (newX == x && newY == y) || (newX == ignoreX && newY == ignoreY)) {
+					continue;
+				}
+				
+				if (playerField[newX][newY].equals("🚢")) {
+					return false;
+				}
+				
+				if (playerField[newX][newY].equals("🟥") && !checkShipDestroy(newX, newY, playerField, x, y)) {
+					return false;
+				}
+			}
+		}
+		
+		return true;
+	}
+	
 	public static int hit(String [][] playerFieldForGame, String [][] playerFieldForCheck, final int currentPlayer, final int x, final int y) {
 		int player = currentPlayer;
 		if (playerFieldForGame[x][y].equals("🚢")) {
 			playerFieldForGame[x][y] = "🟥";
 			playerFieldForCheck[x][y] = "🟥";
 			HelpFunctions.clearScreen();
-			System.out.println("Hit!");
+			if (checkShipDestroy(x, y, playerFieldForGame, x, y)) {
+				System.out.println("Ship is destroyed!");
+			} else {
+				System.out.println("Hit!");
+			}
+			
 		} else if (playerFieldForGame[x][y].equals("🟥")){
 			HelpFunctions.clearScreen();
 			System.out.println("Re - hit!");
