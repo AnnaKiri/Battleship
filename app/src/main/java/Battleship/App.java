@@ -12,11 +12,13 @@ public class App {
 		
 		System.out.println("Let's start placing ships on the Player1 field. Another player, don't look!");
 		String [][] player1FieldForGame = PlayingFieldInput.playingField(scan);
+		System.out.println("All ships placed! Press Enter to continue");
 		scan.nextLine();
 		HelpFunctions.clearScreen();
 		
 		System.out.println("Let's start placing ships on the Player2 field. Another player, don't look!");
 		String [][] player2FieldForGame = PlayingFieldInput.playingField(scan);
+		System.out.println("All ships placed! Press Enter to continue");
 		scan.nextLine();
 		HelpFunctions.clearScreen();
 		
@@ -58,6 +60,8 @@ public class App {
 				continue;
 			}
 			
+			HelpFunctions.clearScreen();
+			
 			final int x = HelpFunctions.getNumberForChar(hitCoordinates.charAt(0));
 			final int y = Integer.parseInt(String.valueOf(hitCoordinates.charAt(1)));
 
@@ -67,9 +71,10 @@ public class App {
 				currentPlayer = HelpFunctions.hit(player1FieldForGame, player1FieldForCheсk, currentPlayer, x, y);
 			}
 			
+			System.out.println("Press Enter to continue");
 			scan.nextLine();
 			HelpFunctions.clearScreen();
-				
+		
 			if (!HelpFunctions.shipsAvailability(player2FieldForGame)) {
 				System.out.println("Player1 wins! 🥳  🎇");
 				break;

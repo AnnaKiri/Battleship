@@ -179,10 +179,10 @@ public class HelpFunctions {
 		return true;
 	}
 	
-	public static void areolaFilling(String [][] playerField) {
+	public static void areolaFilling(String [][] playerField, String sign) {
 		for (int i = 0; i < playerField.length; i++) {
 			for (int j = 0; j < playerField[i].length; j++) {
-				if (playerField[i][j].equals("🚢")) {
+				if (playerField[i][j].equals(sign)) {
 					for (int newX = i-1; newX <= i+1; newX++) {
 						for (int newY = j-1; newY <= j+1; newY++) {
 							if (coordinateCheck(newX, newY) && (playerField[newX][newY].equals("🟦"))) {
@@ -244,6 +244,7 @@ public class HelpFunctions {
 			playerFieldForCheck[x][y] = "🟥";
 			HelpFunctions.clearScreen();
 			if (checkShipDestroy(x, y, playerFieldForGame, x, y)) {
+				areolaFilling(playerFieldForCheck, "🟥");
 				System.out.println("Ship is destroyed!");
 			} else {
 				System.out.println("Hit!");
