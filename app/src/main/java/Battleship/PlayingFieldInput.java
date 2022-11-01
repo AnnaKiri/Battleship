@@ -18,16 +18,64 @@ public class PlayingFieldInput {
 			}
 		}
 		
-		while (true) {
-			System.out.println("Enter the four-deck ship coordinates (format: a0;b1;c3;d4)");
+		PlayingFieldInput.addShip(Ship.FOUR_DECK, playerField, scan);
+		
+		for (int i = 0; i < COUNT_THREE_DECK_SHIPS; i++) {
+			PlayingFieldInput.addShip(Ship.THREE_DECK, playerField, scan);
+		}
+		
+		for (int i = 0; i < COUNT_DOUBLE_DECK_SHIPS; i++) {
+			PlayingFieldInput.addShip(Ship.DOUBLE_DECK, playerField, scan);
+		}
+		
+		for (int i = 0; i < COUNT_SINGLE_DECK_SHIPS; i++) {
+			PlayingFieldInput.addShip(Ship.SINGLE_DECK, playerField, scan);
+		}
+		
+		return playerField;
+	}
+	
+	private static void addShip(Ship ship, String [][] playerField, Scanner scan) {
+		String shipName;
+		String coordinates;
+		int countFieldCell;
+		
+		switch (ship) {
+		case FOUR_DECK:
+			shipName = "four-deck";
+			coordinates = "a0;b1;c2;d3";
+			countFieldCell = 4;
+			break;
+		case THREE_DECK:
+			shipName = "three-deck";
+			coordinates = "a0;b1;c2";
+			countFieldCell = 3;
+			break;
+		case DOUBLE_DECK:
+			shipName = "double-deck";
+			coordinates = "a0;b1";
+			countFieldCell = 2;
+			break;
+		case SINGLE_DECK:
+			shipName = "single-deck";
+			coordinates = "a0";
+			countFieldCell = 1;
+			break;
+		default:
+			System.out.println("Incorrect input of ship size. Try again!");
+			return;
+		}
+		
+		while (true) {	
+			System.out.println("Enter the " + shipName + " ship coordinates (format: " + coordinates + ")");
 			final String shipCoordinates = scan.nextLine();
-			final String[] fourDeckCoord = shipCoordinates.split(";");
-			
-			if (!HelpFunctions.generalCheckOfTheShip(fourDeckCoord, 4, playerField)) {
+			final String[] shipCoordSeparated = shipCoordinates.split(";");
+
+			if (!HelpFunctions.generalCheckOfTheShip(shipCoordSeparated, countFieldCell, playerField)) {
 				continue;
 			}
 			
-			if (HelpFunctions.fieldCellFilling(fourDeckCoord, playerField)) {
+			if (HelpFunctions.fieldCellFilling(shipCoordSeparated, playerField)) {
 				HelpFunctions.clearScreen();
 				HelpFunctions.areolaFilling(playerField, "🚢");
 				HelpFunctions.showMap(playerField);
@@ -35,65 +83,6 @@ public class PlayingFieldInput {
 			} 
 		}
 		
-		for (int i = 0; i < COUNT_THREE_DECK_SHIPS; i++) {
-			while (true) {
-				System.out.println("Enter the three-deck ship coordinates (format: a0;b1;c3)");
-				final String shipCoordinates = scan.nextLine();
-				final String[] threeDeckCoord = shipCoordinates.split(";");
-			
-				if (!HelpFunctions.generalCheckOfTheShip(threeDeckCoord, 3, playerField)) {
-					continue;
-				}
-				
-				if (HelpFunctions.fieldCellFilling(threeDeckCoord, playerField)) {
-					HelpFunctions.clearScreen();
-					HelpFunctions.areolaFilling(playerField, "🚢");
-					HelpFunctions.showMap(playerField);
-					break;
-				} 
-			}
-		}
-	
-		
-		for (int i = 0; i < COUNT_DOUBLE_DECK_SHIPS; i++) {
-			while (true) {	
-				System.out.println("Enter the double-deck ship coordinates (format: a0;b1)");
-				final String shipCoordinates = scan.nextLine();
-				final String[] doubleDeckCoord = shipCoordinates.split(";");
-
-				if (!HelpFunctions.generalCheckOfTheShip(doubleDeckCoord, 2, playerField)) {
-					continue;
-				}
-				
-				if (HelpFunctions.fieldCellFilling(doubleDeckCoord, playerField)) {
-					HelpFunctions.clearScreen();
-					HelpFunctions.areolaFilling(playerField, "🚢");
-					HelpFunctions.showMap(playerField);
-					break;
-				} 
-			}
-		}
-		
-		for (int i = 0; i < COUNT_SINGLE_DECK_SHIPS; i++) {
-			while (true) {	
-				System.out.println("Enter the single-deck ship coordinates (format: a0)");
-				final String shipCoordinates = scan.nextLine();
-				final String[] singleDeckCoord = {shipCoordinates};
-
-				if (!HelpFunctions.generalCheckOfTheShip(singleDeckCoord, 1, playerField)) {
-					continue;
-				}
-				
-				if (HelpFunctions.fieldCellFilling(singleDeckCoord, playerField)) {
-					HelpFunctions.clearScreen();
-					HelpFunctions.areolaFilling(playerField, "🚢");
-					HelpFunctions.showMap(playerField);
-					break;
-				} 
-			}
-		} 
-		
-		return playerField;
 	}
 
 }
